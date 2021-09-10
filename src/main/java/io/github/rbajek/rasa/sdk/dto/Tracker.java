@@ -19,16 +19,16 @@ public class Tracker {
     // Class fields
     //=================================================
 
-    @JsonProperty("conversation_id")
-    private String conversationId;
-
-    private Map<String, Object> slots;
-
     @JsonProperty("sender_id")
     private String senderId;
 
+    private Map<String, Object> slots;
+
     @JsonProperty("latest_message")
-    private Message latestMessage;
+    private Message latestMessage;				// add 09/09/21
+
+    @JsonProperty("latest_event_time")
+    private Long latestEventTime;
 
     @JsonProperty("followup_action")
     private String followupAction;
@@ -40,6 +40,12 @@ public class Tracker {
     @JsonProperty("latest_input_channel")
     private String latestInputChannel;
 
+    @JsonProperty("active_loop")
+    private Map<String, Object> activeLoop;		// add 09/09/21
+
+    @JsonProperty("latest_action")
+    private Map<String, String> latestAction;	// add 09/09/21
+    
     @JsonProperty("latest_action_name")
     private String latestActionName;
 
@@ -50,9 +56,9 @@ public class Tracker {
     // Class methods
     //=================================================
 
-    public boolean hasActiveForm() {
+     public boolean hasActiveForm() {
         return this.activeForm != null && StringUtils.isNotNullOrEmpty(this.activeForm.name);
-    }
+   }
 
     /**
      * Get entity values found for the passed entity name in latest msg.
@@ -118,6 +124,17 @@ public class Tracker {
         @JsonProperty("intent_ranking")
         private List<Intent> intentRanking;
 
+
+        @JsonProperty("message_id")
+        private String messageId;						// add 09/09/21
+        
+        @JsonProperty("metadata")
+        private Map<String, String> metadata;			// add 09/09/21
+        
+        @JsonProperty("response_selector")
+        private Map<String, Object> responseSelector;	// add 09/09/21
+
+
         private String text;
     }
 
@@ -153,5 +170,8 @@ public class Tracker {
         private String value;
         private String entity;
         private Double confidence;
+        private String text;
+        private Map<String, Object> additionalInfo;
+        private String extractor;
     }
 }
